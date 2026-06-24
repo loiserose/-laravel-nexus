@@ -10,6 +10,15 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
+                    
+                    <!-- ✅ ADD THIS PHONE DISPLAY SECTION -->
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">Contact Information</h3>
+                        <div class="mt-2 text-sm text-gray-600">
+                            <p><span class="font-medium">Phone:</span> {{ $user->phone ?? 'Not provided' }}</p>
+                        </div>
+                    </div>
+                    <!-- END OF ADDED SECTION -->
                 </div>
             </div>
 
