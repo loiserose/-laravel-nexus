@@ -25,7 +25,53 @@
                             {{ session('success') }}
                         </div>
                     @endif
+<!-- Filter and Search Section -->
+<div class="mb-6 bg-gray-50 p-4 rounded-lg">
+    <form method="GET" action="{{ route('projects.index') }}" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- Search -->
+        <div>
+            <label for="search" class="block text-sm font-medium text-gray-700">Search</label>
+            <input type="text" name="search" id="search" 
+                   value="{{ request('search') }}"
+                   placeholder="Search projects..."
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+        </div>
 
+        <!-- Filter by Status -->
+        <div>
+            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+            <select name="status" id="status" 
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="">All Statuses</option>
+                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="in-progress" {{ request('status') == 'in-progress' ? 'selected' : '' }}>In Progress</option>
+                <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
+            </select>
+        </div>
+
+        <!-- Sort -->
+        <div>
+            <label for="sort" class="block text-sm font-medium text-gray-700">Sort By</label>
+            <select name="sort" id="sort" 
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Latest First</option>
+                <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
+                <option value="title" {{ request('sort') == 'title' ? 'selected' : '' }}>By Title</option>
+                <option value="deadline" {{ request('sort') == 'deadline' ? 'selected' : '' }}>By Deadline</option>
+            </select>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex items-end space-x-2">
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                Apply Filters
+            </button>
+            <a href="{{ route('projects.index') }}" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
+                Reset
+            </a>
+        </div>
+    </form>
+</div>
                     <!-- Projects List -->
                     @forelse($projects as $project)
                         <div class="border-b border-gray-200 py-4">
@@ -47,19 +93,24 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="flex space-x-2">
-                                    <a href="{{ route('projects.edit', $project) }}" 
-                                       class="text-blue-500 hover:text-blue-700">
-                                        Edit
-                                    </a>
-                                    <form method="POST" action="{{ route('projects.destroy', $project) }}" 
-                                          onsubmit="return confirm('Are you sure you want to delete this project?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:text-red-700">
-                                            Delete
-                                        </button>
-                                    </form>
+                               <div class="flex space-x-2">
+    <a href="{{ route('projects.show', $project) }}" 
+       class="text-green-500 hover:text-green-700">
+        View
+    </a>
+    <a href="{{ route('projects.edit', $project) }}" 
+       class="text-blue-500 hover:text-blue-700">
+        Edit
+    </a>
+    <form method="POST" action="{{ route('projects.destroy', $project) }}" 
+          onsubmit="return confirm('Are you sure you want to delete this project?');">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="text-red-500 hover:text-red-700">
+            Delete
+        </button>
+    </form>
+</div>
                                 </div>
                             </div>
                         </div>
