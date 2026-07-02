@@ -80,8 +80,12 @@
                             @enderror
                         </div>
 
-                        <!-- Submit Button -->
-                        <div class="flex items-center justify-end mt-4">
+                        <!-- Submit Button with Cancel -->
+                        <div class="flex items-center justify-end space-x-2 mt-4">
+                            <a href="{{ route('projects.index') }}" 
+                               class="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                                Cancel
+                            </a>
                             <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 Update Project
                             </button>
