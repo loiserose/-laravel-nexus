@@ -71,6 +71,31 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('projects.index')
-                         ->with('success', 'Project deleted successfully!');
+                         ->with('success', 'Project moved to trash!'); // ← Updated message
+    }
+
+    // ✅ NEW TRASH METHODS
+    public function trashed()
+    {
+        $projects = Auth::user()->projects()->onlyTrashed()->latest()->paginate(5);
+        return view('projects.trashed', compact('projects'));
+    }
+
+    public function restore($id)
+    {
+        $project = Auth::user()->projects()->onlyTrashed()->findOrFail($id);
+        $project->restore();
+
+        return redirect()->route('projects.trashed')
+                         ->with('success', 'Project restored successfully!');
+    }
+
+    public function forceDelete($id)
+    {
+        $project = Auth::user()->projects()->onlyTrashed()->findOrFail($id);
+        $project->forceDelete();
+
+        return redirect()->route('projects.trashed')
+                         ->with('success', 'Project permanently deleted!');
     }
 }
