@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes; // ← ADD THIS LINE
 
 class Project extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes; // ← ADD SoftDeletes HERE
 
     protected $fillable = [
         'user_id',
