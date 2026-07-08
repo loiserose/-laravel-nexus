@@ -59,6 +59,19 @@
                         <p class="mt-2 text-gray-600">{{ $project->description ?? 'No description provided' }}</p>
                     </div>
 
+                    <!-- Project Owner -->
+<div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+    <h4 class="text-sm font-medium text-gray-500">Project Owner</h4>
+    <div class="mt-2 flex items-center space-x-3">
+        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+            {{ substr($project->user->name, 0, 1) }}
+        </div>
+        <div>
+            <p class="font-medium text-gray-900">{{ $project->user->name }}</p>
+            <p class="text-sm text-gray-500">{{ $project->user->email }}</p>
+        </div>
+    </div>
+</div>
                     <!-- Action Buttons -->
                     <div class="flex space-x-4">
                         <a href="{{ route('projects.edit', $project) }}" 
