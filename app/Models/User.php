@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     // Relationship: User has many Projects
     public function projects()
-    {
-        return $this->hasMany(Project::class);
-    }
+{
+    return $this->hasMany(Project::class);
+}
 }

@@ -10,7 +10,7 @@ class ProjectController extends Controller
 {
     // No __construct needed - middleware is in routes
 
-    public function index()
+   public function index()
 {
     $projects = Auth::user()->projects()->with('user')->latest()->paginate(5);
     return view('projects.index', compact('projects'));
@@ -41,7 +41,7 @@ class ProjectController extends Controller
                          ->with('success', 'Project created successfully!');
     }
 
-   public function show(Project $project)
+  public function show(Project $project)
 {
     $project->load('user');
     return view('projects.show', compact('project'));
